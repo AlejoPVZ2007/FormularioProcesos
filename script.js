@@ -5,7 +5,7 @@ const proceso = document.getElementById("proceso");
         const otraConsulta = document.getElementById("otraConsulta");
 
         proceso.addEventListener("change", () => {
-            tipo.replaceChildren(new Option("-- Selecciona una opción --", ""));
+            tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
             cantidad.readOnly = proceso.value === "mayor";
 
             if (proceso.value === "mayor") {
