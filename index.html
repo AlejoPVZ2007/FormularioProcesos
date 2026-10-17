@@ -4,77 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Procesos</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Plantilla de Consulta de Procesos DEAC</h1>
-    
-    <h3>Etapa 1</h3>
+    <div class="plantilla">
 
-    <h4>Porcentaje de cambio del Plan Curricular</h4>
+        <h1>Plantilla de Costos de los Procesos DEAC</h1>
 
-    <select id="proceso" name="proceso">
-        <option value="">-- Seleccionar % de Cambio --</option>
-        <option value="mayor">Mayor del 20%</option>
-        <option value="menor">Menor del 20%</option>
-    </select>
+        <!-- ETAPA 1 -->
+        <h3>Etapa 1</h3>
 
-    <h3>Nota</h3>
+        <div class="fila">
+            <label class="etiqueta" for="proceso">Porcentaje de Cambio del Plan Curricular</label>
+            <div class="campo">
+                <span class="campo-titulo">Seleccionar % de Cambio</span>
+                <select id="proceso" name="proceso">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="mayor">Mayor_al_20</option>
+                    <option value="menor">Menor_al_20</option>
+                </select>
+            </div>
+        </div>
 
-    <h4>Tipo de Proceso a presentar</h4>
+        <p class="nota">Nota:</p>
 
-    <select id="tipo" name="tipo">
-        <option value="">-- Selecciona Tipo de Proceso --</option>
-    </select>
+        <div class="fila">
+            <label class="etiqueta" for="tipo">Tipo de Proceso a presentar</label>
+            <div class="campo">
+                <span class="campo-titulo">Seleccionar Tipo de Proceso</span>
+                <select id="tipo" name="tipo">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="nuevo">Nuevo programa</option>
+                </select>
+            </div>
+        </div>
 
-    <h4>Ingresar N° de cursos nuevos en el Plan Curricular</h4>
-    <input type="number" id="cantidad" name="cantidad" 
-    placeholder="Ingrese la cantidad de cursos nuevos">
+        <div class="fila">
+            <label class="etiqueta" for="cantidad">Cantidad de cursos nuevos en el Plan Curricular</label>
+            <div class="campo">
+                <span class="campo-titulo">Ingresar cantidad de cursos</span>
+                <input type="number" id="cantidad" name="cantidad" min="0">
+            </div>
+        </div>
 
-    <br>
+        <div class="fila">
+            <span class="etiqueta">Sedes en las que dictará el programa</span>
+            <div class="sedes">
+                <label class="sede"><input type="checkbox" name="sede" value="molina"> La Molina</label>
+                <label class="sede"><input type="checkbox" name="sede" value="norte"> Lima Norte</label>
+                <label class="sede"><input type="checkbox" name="sede" value="pachacamac"> Pachacamac</label>
+            </div>
+        </div>
 
-    <h4>Seleccionar Sedes en la que se dictará el programa</h4>
+        <!-- ETAPA 2 -->
+        <h3>Etapa 2</h3>
 
-    <input type="checkbox" id="sede" name="molina" value="molina">
-    <label for="molina">La Molina</label>
-    
-    <br>
-    
-    <input type="checkbox" id="sede" name="norte" value="norte">
-    <label for="norte">Lima Norte</label>
-    
-    <br>
-    
-    <input type="checkbox" id="sede" name="pachacamac" value="pachacamac">
-    <label for="pachacamac">Pachacamac</label>
+        <div class="fila">
+            <label class="etiqueta" for="nivelAcademico">Nivel Académico del programa a presentar</label>
+            <div class="campo">
+                <span class="campo-titulo">Seleccionar nivel académico</span>
+                <select id="nivelAcademico" name="nivelAcademico">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="pregrado">Pregrado</option>
+                    <option value="maestria">Maestría</option>
+                    <option value="doctorado">Doctorado</option>
+                    <option value="segunda">Segunda Especialidad</option>
+                </select>
+            </div>
+        </div>
 
-    <h3>Etapa 2</h3>
+        <div class="fila">
+            <span class="etiqueta activo">Costo aproximado del 25% de cursos seleccionados por DEAC</span>
+            <output class="resultado" id="costo25">$500.00</output>
+        </div>
 
-    <h4>Nivel Académico del programa a presentar</h4>
+        <div class="fila">
+            <span class="etiqueta">Costo aproximado de la Revisión de Seguimiento del Especialista</span>
+            <output class="resultado" id="costoRevision">$1,200.00</output>
+        </div>
 
-    <select id="proceso" name="proceso">
-        <option value="">-- Seleccionar nivel académico --</option>
-        <option value="pregrado">Pregrado</option>
-        <option value="maestria">Maestría</option>
-        <option value="doctorado">Doctorado</option>
-        <option value="segunda">Segunda Especialidad</option>
-    </select>
+        <!-- ETAPA 3 -->
+        <h3>Etapa 3</h3>
 
-    <h4>Costo aproximado del 25% de cursos seleccionados por DEAC</h4>
-    <input type="text" value="$500.00" readonly>
+        <div class="fila">
+            <span class="etiqueta">Costo aproximado de la Visita de DEAC</span>
+            <output class="resultado" id="costoVisita">$12,441.00</output>
+        </div>
 
-    <h4>Costo aproximado de la Revisión de Seguimiento del Especialista</h4>
-    <input type="text" value="$1,200.00" readonly>
+        <div class="fila total">
+            <span class="etiqueta">COSTO TOTAL EN $.</span>
+            <output class="resultado" id="totalDolares">$15,741.00</output>
+        </div>
 
-    <h3>Etapa 3</h3>
+        <div class="fila total">
+            <span class="etiqueta">COSTO TOTAL EN S/.</span>
+            <output class="resultado" id="totalSoles">S/ 56,667.60</output>
+        </div>
 
-    <h4>Costo aproximado de la Visita de DEAC</h4>
-    <input type="text" value="$12,441.00" readonly>
-    
-    <h4>COSTO TOTAL EN $.</h4>
-    <input type="text" value="$15,741.00" readonly>
-
-    <h4>COSTO TOTAL EN S/.</h4>
-    <input type="text" value="$56,667.60" readonly>
+        <input type="button" id="otraConsulta" value="Realizar otra consulta">
+    </div>
 
     <script src="script.js"></script>
 </body>
