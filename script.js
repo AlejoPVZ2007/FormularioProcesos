@@ -7,6 +7,7 @@ const proceso = document.getElementById("proceso");
             cantidad.readOnly = proceso.value === "mayor";
 
             if (proceso.value === "mayor") {
+                cantidad.value = "";
                 tipo.add(new Option("Nuevo programa"));
                 tipo.add(new Option("Nueva sede"));
             } else if (proceso.value === "menor") {
