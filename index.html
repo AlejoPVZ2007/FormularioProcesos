@@ -9,32 +9,73 @@
     <h1>Plantilla de Consulta de Procesos DEAC</h1>
     
     <h3>Etapa 1</h3>
+
     <h4>Porcentaje de cambio del Plan Curricular</h4>
+
     <select id="proceso" name="proceso">
-        <option value="">-- Selecciona una opción --</option>
+        <option value="">-- Seleccionar % de Cambio --</option>
         <option value="mayor">Mayor del 20%</option>
         <option value="menor">Menor del 20%</option>
     </select>
 
     <h3>Nota</h3>
+
     <h4>Tipo de Proceso a presentar</h4>
+
     <select id="tipo" name="tipo">
-        <option value="">-- Selecciona una opción --</option>
+        <option value="">-- Selecciona Tipo de Proceso --</option>
     </select>
 
     <h4>Ingresar N° de cursos nuevos en el Plan Curricular</h4>
-    <input type="number" id="cantidad" name="cantidad">
+    <input type="number" id="cantidad" name="cantidad" 
+    placeholder="Ingrese la cantidad de cursos nuevos">
 
-    <br><br>
+    <br>
 
-    <input type="checkbox" id="sede" name="enviar" value="enviar">
-    <label for="enviar">La Molina</label>
-<br>
-    <input type="checkbox" id="sede" name="enviar" value="enviar">
-    <label for="enviar">Lima Norte</label>
-<br>
-    <input type="checkbox" id="sede" name="enviar" value="enviar">
-    <label for="enviar">Pachacamac</label>
+    <h4>Seleccionar Sedes en la que se dictará el programa</h4>
+
+    <input type="checkbox" id="sede" name="molina" value="molina">
+    <label for="molina">La Molina</label>
+    
+    <br>
+    
+    <input type="checkbox" id="sede" name="norte" value="norte">
+    <label for="norte">Lima Norte</label>
+    
+    <br>
+    
+    <input type="checkbox" id="sede" name="pachacamac" value="pachacamac">
+    <label for="pachacamac">Pachacamac</label>
+
+    <h3>Etapa 2</h3>
+
+    <h4>Nivel Académico del programa a presentar</h4>
+
+    <select id="proceso" name="proceso">
+        <option value="">-- Seleccionar nivel académico --</option>
+        <option value="pregrado">Pregrado</option>
+        <option value="maestria">Maestría</option>
+        <option value="doctorado">Doctorado</option>
+        <option value="segunda">Segunda Especialidad</option>
+    </select>
+
+    <h4>Costo aproximado del 25% de cursos seleccionados por DEAC</h4>
+    <input type="text" value="$500.00" readonly>
+
+    <h4>Costo aproximado de la Revisión de Seguimiento del Especialista</h4>
+    <input type="text" value="$1,200.00" readonly>
+
+    <h3>Etapa 3</h3>
+
+    <h4>Costo aproximado de la Visita de DEAC</h4>
+    <input type="text" value="$12,441.00" readonly>
+    
+    <h4>COSTO TOTAL EN $.</h4>
+    <input type="text" value="$15,741.00" readonly>
+
+    <h4>COSTO TOTAL EN S/.</h4>
+    <input type="text" value="$56,667.60" readonly>
+
     <script src="script.js"></script>
 </body>
 </html>
