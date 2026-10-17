@@ -6,10 +6,10 @@
     <title>Procesos</title>
 </head>
 <body>
-    <h1>Formulario de procesos</h1>
+    <h1>Plantilla de Consulta de Procesos DEAC</h1>
     
     <h3>Etapa 1</h3>
-    <h4>Porcentaje de cambio</h4>
+    <h4>Porcentaje de cambio del Plan Curricular</h4>
     <select id="proceso" name="proceso">
         <option value="">-- Selecciona una opción --</option>
         <option value="mayor">Mayor del 20%</option>
@@ -17,11 +17,24 @@
     </select>
 
     <h3>Nota</h3>
-    <h4>Tipo de proceso</h4>
+    <h4>Tipo de Proceso a presentar</h4>
     <select id="tipo" name="tipo">
         <option value="">-- Selecciona una opción --</option>
     </select>
 
+    <h4>Ingresar N° de cursos nuevos en el Plan Curricular</h4>
+    <input type="number" id="cantidad" name="cantidad">
+
+    <br><br>
+
+    <input type="checkbox" id="sede" name="enviar" value="enviar">
+    <label for="enviar">La Molina</label>
+<br>
+    <input type="checkbox" id="sede" name="enviar" value="enviar">
+    <label for="enviar">Lima Norte</label>
+<br>
+    <input type="checkbox" id="sede" name="enviar" value="enviar">
+    <label for="enviar">Pachacamac</label>
     <script src="script.js"></script>
 </body>
 </html>
