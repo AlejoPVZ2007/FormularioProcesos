@@ -4,6 +4,10 @@ const proceso = document.getElementById("proceso");
         const nivelAcademico = document.getElementById("nivelAcademico");
         const otraConsulta = document.getElementById("otraConsulta");
 
+        cantidad.addEventListener("input", () => {
+            cantidad.value = cantidad.value.replace(/\D/g, "");
+        });
+
         proceso.addEventListener("change", () => {
             tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
             cantidad.readOnly = proceso.value === "mayor";
