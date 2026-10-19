@@ -50,31 +50,38 @@ const proceso = document.getElementById("proceso");
         });
 
         (async function contadorVisitas() {
-    const el = document.getElementById("visitas");
-    if (!el) return;
+        const el = document.getElementById("visitas");
+        if (!el) return;
 
-    // Cambia estos valores por algo único tuyo
-    const NAMESPACE = "AlejoPVZ2007";
-    const CLAVE = "FormularioProcesos";
+        const WORKSPACE = "alejopvz2007s-team-5964";
+        const CLAVE = "first-counter-5964";
 
-    // Evita contar tus pruebas locales junto con las visitas reales
-    const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
-    const clave = esLocal ? CLAVE + "-local" : CLAVE;
+        // En local no cuenta, para no mezclar tus pruebas con las visitas reales
+        const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+        if (esLocal) {
+            el.textContent = "(modo local)";
+            return;
+        }
 
-    try {
-        // Solo suma una vez por sesión (F5 no infla el número)
-        const yaContado = sessionStorage.getItem("visita-contada");
-        const accion = yaContado ? "" : "/up";
+        try {
+            // Solo suma una vez por sesión (F5 no infla el número)
+            const yaContado = sessionStorage.getItem("visita-contada");
+            const accion = yaContado ? "" : "/up";
 
-        const res = await fetch(
-        `https://api.counterapi.dev/v1/${NAMESPACE}/${clave}${accion}`
-        );
-        const data = await res.json();
+            const res = await fetch(
+            `https://api.counterapi.dev/v2/${WORKSPACE}/${CLAVE}${accion}`
+            );
+            if (!res.ok) throw new Error("Respuesta " + res.status);
 
-        sessionStorage.setItem("visita-contada", "1");
-        el.textContent = data.count.toLocaleString("es-PE");
-    } catch (e) {
-        el.textContent = "—";
-        console.error("No se pudo cargar el contador", e);
-    }
-    })();
+            const data = await res.json();
+            // La v2 puede devolver el número en distintos campos
+            const total = data.count ?? data.value ?? data.data?.up_count;
+            if (total === undefined) throw new Error("Formato inesperado");
+
+            sessionStorage.setItem("visita-contada", "1");
+            el.textContent = Number(total).toLocaleString("es-PE");
+        } catch (e) {
+            el.textContent = "—";
+            console.error("No se pudo cargar el contador", e);
+        }
+        })();
