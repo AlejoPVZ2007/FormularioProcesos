@@ -48,3 +48,33 @@ const proceso = document.getElementById("proceso");
                 checkbox.checked = false;
             });
         });
+
+        (async function contadorVisitas() {
+    const el = document.getElementById("visitas");
+    if (!el) return;
+
+    // Cambia estos valores por algo único tuyo
+    const NAMESPACE = "AlejoPVZ2007";
+    const CLAVE = "FormularioProcesos";
+
+    // Evita contar tus pruebas locales junto con las visitas reales
+    const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+    const clave = esLocal ? CLAVE + "-local" : CLAVE;
+
+    try {
+        // Solo suma una vez por sesión (F5 no infla el número)
+        const yaContado = sessionStorage.getItem("visita-contada");
+        const accion = yaContado ? "" : "/up";
+
+        const res = await fetch(
+        `https://api.counterapi.dev/v1/${NAMESPACE}/${clave}${accion}`
+        );
+        const data = await res.json();
+
+        sessionStorage.setItem("visita-contada", "1");
+        el.textContent = data.count.toLocaleString("es-PE");
+    } catch (e) {
+        el.textContent = "—";
+        console.error("No se pudo cargar el contador", e);
+    }
+    })();

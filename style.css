@@ -205,3 +205,17 @@ button:focus-visible {
         width: 100%;
     }
 }
+
+.contador-visitas {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    background: #1e293b;
+    color: #e2e8f0;
+    display: inline-block;
+}
+
+#visitas {
+    font-weight: 700;
+    color: #38bdf8;
+}
