@@ -98,6 +98,12 @@ input:focus {
     outline: 3px solid rgb(57 120 185 / 15%);
 }
 
+select:disabled {
+    background: #f7f9fc;
+    color: #64748b;
+    cursor: not-allowed;
+}
+
 input[readonly] {
     border-color: #e0e7f0;
     background: #f7f9fc;
@@ -112,6 +118,10 @@ input[readonly] {
     margin: 0;
     padding: 0;
     border: 0;
+}
+
+.sedes:disabled {
+    opacity: 0.55;
 }
 
 .sedes legend {

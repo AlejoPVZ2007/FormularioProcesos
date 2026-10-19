@@ -2,6 +2,9 @@ const proceso = document.getElementById("proceso");
         const tipo = document.getElementById("tipo");
         const cantidad = document.getElementById("cantidad");
         const nivelAcademico = document.getElementById("nivelAcademico");
+        const sedes = document.querySelector(".sedes");
+        const costoCursos = document.getElementById("costo-cursos");
+        const costoRevision = document.getElementById("costo-revision");
         const otraConsulta = document.getElementById("otraConsulta");
 
         cantidad.addEventListener("input", () => {
@@ -11,12 +14,21 @@ const proceso = document.getElementById("proceso");
         proceso.addEventListener("change", () => {
             tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
             cantidad.readOnly = proceso.value === "mayor";
+            const bloquearSedesYNivel = proceso.value === "menor";
+            sedes.disabled = bloquearSedesYNivel;
+            nivelAcademico.disabled = bloquearSedesYNivel;
+            costoCursos.value = bloquearSedesYNivel ? "$0.00" : costoCursos.defaultValue;
+            costoRevision.value = bloquearSedesYNivel ? "$0.00" : costoRevision.defaultValue;
 
             if (proceso.value === "mayor") {
                 cantidad.value = "";
                 tipo.add(new Option("Nuevo programa"));
                 tipo.add(new Option("Nueva sede"));
             } else if (proceso.value === "menor") {
+                sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+                    checkbox.checked = false;
+                });
+                nivelAcademico.value = "";
                 tipo.add(new Option("Rediseño no sustantivo"));
             }
         });
@@ -25,10 +37,14 @@ const proceso = document.getElementById("proceso");
             proceso.value = "";
             tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
             nivelAcademico.value = "";
+            nivelAcademico.disabled = false;
             cantidad.value = "";
             cantidad.readOnly = false;
+            sedes.disabled = false;
+            costoCursos.value = costoCursos.defaultValue;
+            costoRevision.value = costoRevision.defaultValue;
 
-            document.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
                 checkbox.checked = false;
             });
         });
