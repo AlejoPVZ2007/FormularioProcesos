@@ -166,7 +166,9 @@ input[type="checkbox"] {
 
 .acciones {
     display: flex;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
     padding-top: 2px;
 }
 
@@ -204,18 +206,27 @@ button:focus-visible {
     .acciones button {
         width: 100%;
     }
+
+    .acciones {
+        align-items: flex-start;
+        flex-direction: column;
+    }
 }
 
 .contador-visitas {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background: #1e293b;
-    color: #e2e8f0;
-    display: inline-block;
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    border: 1px solid #cbdcf0;
+    border-radius: 7px;
+    background: #eff6ff;
+    color: #173b68;
+    font-weight: 600;
 }
 
 #visitas {
     font-weight: 700;
-    color: #38bdf8;
+    color: #1d5a9e;
 }

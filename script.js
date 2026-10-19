@@ -56,7 +56,6 @@ const proceso = document.getElementById("proceso");
         const WORKSPACE = "alejopvz2007s-team-5964";
         const CLAVE = "first-counter-5964";
 
-        // En local no cuenta, para no mezclar tus pruebas con las visitas reales
         const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
         if (esLocal) {
             el.textContent = "(modo local)";
@@ -64,7 +63,6 @@ const proceso = document.getElementById("proceso");
         }
 
         try {
-            // Solo suma una vez por sesión (F5 no infla el número)
             const yaContado = sessionStorage.getItem("visita-contada");
             const accion = yaContado ? "" : "/up";
 
@@ -74,7 +72,6 @@ const proceso = document.getElementById("proceso");
             if (!res.ok) throw new Error("Respuesta " + res.status);
 
             const data = await res.json();
-            // La v2 puede devolver el número en distintos campos
             const total = data.count ?? data.value ?? data.data?.up_count;
             if (total === undefined) throw new Error("Formato inesperado");
 
