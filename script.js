@@ -50,35 +50,37 @@ const proceso = document.getElementById("proceso");
         });
 
         (async function contadorVisitas() {
-        const el = document.getElementById("visitas");
-        if (!el) return;
+            const el = document.getElementById("visitas");
+            if (!el) return;
 
-        const WORKSPACE = "alejopvz2007s-team-5964";
-        const CLAVE = "first-counter-5964";
+            const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+            const contador = el.closest(".contador-visitas");
+            if (!contador) return;
 
-        const esLocal = ["localhost", "127.0.0.1", ""].includes(location.hostname);
-        if (esLocal) {
-            el.textContent = "(modo local)";
-            return;
-        }
+            if (esLocal) contador.hidden = false;
 
-        try {
-            const yaContado = sessionStorage.getItem("visita-contada");
-            const accion = yaContado ? "" : "/up";
+            try {
+                const workspace = "alejopvz2007s-team-5964";
+                const clave = "first-counter-5964";
+                const yaContado = esLocal ? null : sessionStorage.getItem("visita-contada");
+                const accion = !esLocal && !yaContado ? "/up" : "";
 
-            const res = await fetch(
-            `https://api.counterapi.dev/v2/${WORKSPACE}/${CLAVE}${accion}`
-            );
-            if (!res.ok) throw new Error("Respuesta " + res.status);
+                const res = await fetch(
+                    `https://api.counterapi.dev/v2/${workspace}/${clave}${accion}`
+                );
+                if (!res.ok) throw new Error("Respuesta " + res.status);
 
-            const data = await res.json();
-            const total = data.count ?? data.value ?? data.data?.up_count;
-            if (total === undefined) throw new Error("Formato inesperado");
+                const data = await res.json();
+                const total = data.count ?? data.value ?? data.data?.up_count;
+                if (total === undefined) throw new Error("Formato inesperado");
 
-            sessionStorage.setItem("visita-contada", "1");
-            el.textContent = Number(total).toLocaleString("es-PE");
-        } catch (e) {
-            el.textContent = "—";
-            console.error("No se pudo cargar el contador", e);
-        }
+                if (!esLocal && !yaContado) {
+                    sessionStorage.setItem("visita-contada", "1");
+                }
+
+                if (esLocal) el.textContent = Number(total).toLocaleString("es-PE");
+            } catch (error) {
+                if (esLocal) el.textContent = "—";
+                console.error("No se pudo cargar el contador de visitas", error);
+            }
         })();

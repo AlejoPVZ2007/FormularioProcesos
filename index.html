@@ -89,19 +89,26 @@
                     <label for="costo-visita">Costo aproximado de la Visita de DEAC</label>
                     <input type="text" id="costo-visita" value="$12,441.00" readonly>
                 </div>
+            </div>
+        </section>
+
+        <section class="etapa" aria-labelledby="etapa4">
+            <h2 id="etapa4"><span class="numero-etapa">4</span> Costos totales</h2>
+
+            <div class="costos">
                 <div class="campo total">
-                    <label for="total-dolares">Costo total en $</label>
+                    <label for="total-dolares">Costo total en dólares</label>
                     <input type="text" id="total-dolares" value="$15,741.00" readonly>
                 </div>
                 <div class="campo total">
-                    <label for="total-soles">Costo total en S/</label>
-                    <input type="text" id="total-soles" value="$56,667.60" readonly>
+                    <label for="total-soles">Costo total en soles</label>
+                    <input type="text" id="total-soles" value="S/ 56,667.60" readonly>
                 </div>
             </div>
         </section>
 
         <div class="acciones">
-            <div class="contador-visitas">
+            <div class="contador-visitas" hidden>
                 👁️ Visitas: <span id="visitas">...</span>
             </div>
             <button type="button" id="otraConsulta">Realizar otra consulta</button>

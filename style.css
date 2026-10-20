@@ -226,6 +226,10 @@ button:focus-visible {
     font-weight: 600;
 }
 
+.contador-visitas[hidden] {
+    display: none;
+}
+
 #visitas {
     font-weight: 700;
     color: #1d5a9e;
