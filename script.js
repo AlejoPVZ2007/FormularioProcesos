@@ -15,8 +15,15 @@ const costosBasePorTipo = {
     "rediseno-no-sustantivo": "$200.00"
 };
 
+function crearPlaceholder(texto) {
+    const placeholder = new Option(texto, "", true, true);
+    placeholder.disabled = true;
+    placeholder.hidden = true;
+    return placeholder;
+}
+
 function actualizarOpcionesCantidad() {
-    cantidad.replaceChildren(new Option("-- Seleccionar número de cursos --", ""));
+    cantidad.replaceChildren(crearPlaceholder("-- Seleccionar número de cursos --"));
     const maximo = nivelAcademico.value === "pregrado" ? 10 : nivelAcademico.value ? 5 : 0;
 
     if (maximo === 0) {
@@ -32,7 +39,7 @@ function actualizarOpcionesCantidad() {
 nivelAcademico.addEventListener("change", actualizarOpcionesCantidad);
 
 proceso.addEventListener("change", () => {
-    tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
+    tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     costoBase.textContent = "";
     codigoProceso.textContent = proceso.value === "mayor" ? "A" : proceso.value === "menor" ? "B" : "";
     const esMenor = proceso.value === "menor";
@@ -67,7 +74,7 @@ otraConsulta.addEventListener("click", () => {
     proceso.value = "";
     codigoProceso.textContent = "";
     costoBase.textContent = "";
-    tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
+    tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     nivelAcademico.value = "";
     nivelAcademico.disabled = true;
     cantidad.disabled = true;
