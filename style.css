@@ -53,6 +53,43 @@ h1 {
     font-size: 1.2rem;
 }
 
+.etapa-cabecera {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.etapa-cabecera h2 {
+    flex: 1;
+}
+
+.dato-etapa {
+    flex: 0 0 180px;
+    margin-bottom: 20px;
+}
+
+.dato-etapa input {
+    font-weight: 600;
+}
+
+.sedes-costo {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.sedes-costo .sedes {
+    flex: 1;
+    min-width: 0;
+}
+
+.costo-etapa {
+    flex-basis: 180px;
+    margin-bottom: 0;
+}
+
 .numero-etapa {
     display: inline-grid;
     width: 30px;
@@ -201,6 +238,27 @@ button:focus-visible {
 
     .etapa {
         padding: 18px;
+    }
+
+    .etapa-cabecera {
+        flex-wrap: wrap;
+    }
+
+    .etapa-cabecera h2 {
+        flex-basis: 200px;
+    }
+
+    .etapa-cabecera .dato-etapa {
+        margin-left: auto;
+    }
+
+    .sedes-costo {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .costo-etapa {
+        align-self: flex-end;
     }
 
     .acciones button {

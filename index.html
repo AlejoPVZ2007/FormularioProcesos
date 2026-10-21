@@ -13,8 +13,14 @@
             <p class="intro">Completa las etapas para consultar el proceso y sus costos aproximados.</p>
         </header>
 
-        <section class="etapa" aria-labelledby="etapa1">
-            <h2 id="etapa1"><span class="numero-etapa">1</span> Etapa 1: Aplicación</h2>
+        <section class="etapa etapa-aplicacion" aria-labelledby="etapa1">
+            <div class="etapa-cabecera">
+                <h2 id="etapa1"><span class="numero-etapa">1</span> Etapa 1: Aplicación</h2>
+                <div class="campo dato-etapa">
+                    <label for="tipo-cambio">Tipo de cambio</label>
+                    <input type="text" id="tipo-cambio" value="3.6" readonly>
+                </div>
+            </div>
 
             <div class="campo">
                 <label for="proceso">Porcentaje de cambio del Plan Curricular</label>
@@ -54,21 +60,27 @@
                 </select>
             </div>
 
-            <fieldset class="campo sedes" disabled>
-                <legend>Sedes en las que se dictará el programa</legend>
-                <label class="sede-opcion" for="sede-molina">
-                    <input type="checkbox" id="sede-molina" name="molina" value="molina">
-                    La Molina
-                </label>
-                <label class="sede-opcion" for="sede-norte">
-                    <input type="checkbox" id="sede-norte" name="norte" value="norte">
-                    Lima Norte
-                </label>
-                <label class="sede-opcion" for="sede-pachacamac">
-                    <input type="checkbox" id="sede-pachacamac" name="pachacamac" value="pachacamac">
-                    Pachacamac
-                </label>
-            </fieldset>
+            <div class="sedes-costo">
+                <fieldset class="campo sedes" disabled>
+                    <legend>Sedes en las que se dictará el programa</legend>
+                    <label class="sede-opcion" for="sede-molina">
+                        <input type="checkbox" id="sede-molina" name="molina" value="molina">
+                        La Molina
+                    </label>
+                    <label class="sede-opcion" for="sede-norte">
+                        <input type="checkbox" id="sede-norte" name="norte" value="norte">
+                        Lima Norte
+                    </label>
+                    <label class="sede-opcion" for="sede-pachacamac">
+                        <input type="checkbox" id="sede-pachacamac" name="pachacamac" value="pachacamac">
+                        Pachacamac
+                    </label>
+                </fieldset>
+                <div class="campo dato-etapa costo-etapa">
+                    <label for="costo-etapa1">Costo Etapa 1</label>
+                    <input type="text" id="costo-etapa1" value="$ 1000" readonly>
+                </div>
+            </div>
         </section>
 
         <section class="etapa" aria-labelledby="etapa2">
