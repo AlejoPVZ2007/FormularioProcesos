@@ -50,7 +50,7 @@ function actualizarCostoEtapa1() {
     const costoBaseActual = Number(costoBaseTipo.replace("$", ""));
     const cantidadAdicional = proceso.value === "menor"
         ? (Number(cantidad.value) || 0) * 100
-        : sedes.querySelectorAll('input[type="checkbox"]:checked').length * 750;
+        : sedes.querySelectorAll('input[type="checkbox"]:checked:not(#sede-distancia)').length * 750;
     const total = costoBaseActual + cantidadAdicional;
 
     costoEtapa1.value = `$ ${total.toLocaleString("en-US", {
