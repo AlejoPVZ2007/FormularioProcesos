@@ -8,11 +8,12 @@ const costoRevision = document.getElementById("costo-revision");
 const otraConsulta = document.getElementById("otraConsulta");
 const codigoProceso = document.getElementById("codigo-proceso");
 const costoBase = document.getElementById("costo-base");
+const costoEtapa1 = document.getElementById("costo-etapa1");
 const costosBasePorTipo = {
     "nuevo-programa": "$300.00",
     "nueva-sede": "$100.00",
     "nuevo-programa-y-nueva-sede": "$400.00",
-    "rediseno-no-sustantivo": "$200.00"
+    "rediseno-no-sustantivo": "$350.00"
 };
 
 function crearPlaceholder(texto) {
@@ -36,11 +37,29 @@ function actualizarOpcionesCantidad() {
     }
 }
 
-nivelAcademico.addEventListener("change", actualizarOpcionesCantidad);
+function actualizarCostoEtapa1() {
+    if (proceso.value !== "menor") return;
+
+    const costoBaseActual = Number(costosBasePorTipo[tipo.value]?.replace("$", ""));
+    const numeroCursos = Number(cantidad.value) || 0;
+    const total = costoBaseActual + numeroCursos * 100;
+
+    costoEtapa1.value = `$ ${total.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
+}
+
+nivelAcademico.addEventListener("change", () => {
+    actualizarOpcionesCantidad();
+    actualizarCostoEtapa1();
+});
+cantidad.addEventListener("change", actualizarCostoEtapa1);
 
 proceso.addEventListener("change", () => {
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     costoBase.textContent = "";
+    costoEtapa1.value = costoEtapa1.defaultValue;
     codigoProceso.textContent = proceso.value === "mayor" ? "A" : proceso.value === "menor" ? "B" : "";
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
@@ -68,12 +87,14 @@ proceso.addEventListener("change", () => {
 
 tipo.addEventListener("change", () => {
     costoBase.textContent = costosBasePorTipo[tipo.value] || "";
+    actualizarCostoEtapa1();
 });
 
 otraConsulta.addEventListener("click", () => {
     proceso.value = "";
     codigoProceso.textContent = "";
     costoBase.textContent = "";
+    costoEtapa1.value = costoEtapa1.defaultValue;
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     nivelAcademico.value = "";
     nivelAcademico.disabled = true;
