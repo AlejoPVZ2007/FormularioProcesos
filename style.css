@@ -252,13 +252,39 @@ button:focus-visible {
         margin-left: auto;
     }
 
+    .dato-etapa {
+        flex-basis: 130px;
+        margin-bottom: 14px;
+    }
+
+    .dato-etapa > label {
+        font-size: 0.9rem;
+        margin-bottom: 6px;
+    }
+
+    .dato-etapa input {
+        min-height: 38px;
+        padding: 8px 10px;
+        font-size: 0.95rem;
+    }
+
     .sedes-costo {
-        align-items: stretch;
-        flex-direction: column;
+        align-items: flex-end;
+        gap: 10px;
+    }
+
+    .sedes-costo .sedes {
+        flex: 1 1 auto;
     }
 
     .costo-etapa {
-        align-self: flex-end;
+        flex: 0 0 120px;
+    }
+
+    .sede-opcion {
+        gap: 6px;
+        padding: 8px;
+        font-size: 0.9rem;
     }
 
     .acciones button {
