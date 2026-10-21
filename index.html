@@ -75,6 +75,10 @@
                         <input type="checkbox" id="sede-pachacamac" name="pachacamac" value="pachacamac">
                         Pachacamac
                     </label>
+                    <label class="sede-opcion" for="sede-distancia">
+                        <input type="checkbox" id="sede-distancia" name="distancia" value="distancia">
+                        A Distancia
+                    </label>
                 </fieldset>
                 <div class="campo dato-etapa costo-etapa">
                     <label for="costo-etapa1">Costo Etapa 1</label>
@@ -86,6 +90,17 @@
         <section class="etapa" aria-labelledby="etapa2">
             <h2 id="etapa2"><span class="numero-etapa">2</span> Etapa 2: Revisión Curricular</h2>
 
+            <div class="campo">
+                <label for="nivelAcademico2">Nivel académico del programa a presentar</label>
+                <select id="nivelAcademico2" name="nivelAcademico2" disabled>
+                    <option value="" disabled selected hidden>-- Seleccionar nivel académico --</option>
+                    <option value="pregrado">Pregrado</option>
+                    <option value="maestria">Maestría</option>
+                    <option value="doctorado">Doctorado</option>
+                    <option value="segunda">Segunda Especialidad</option>
+                </select>
+            </div>
+
             <div class="costos">
                 <div class="campo">
                     <label for="costo-cursos">Costo aproximado del 25% de cursos seleccionados por DEAC</label>
@@ -94,6 +109,10 @@
                 <div class="campo">
                     <label for="costo-revision">Costo aproximado de la Revisión de Seguimiento del Especialista</label>
                     <input type="text" id="costo-revision" value="$1,200.00" readonly>
+                </div>
+                <div class="campo total">
+                    <label for="costo-etapa2">Costo Etapa 2</label>
+                    <input type="text" id="costo-etapa2" value="$ ####" readonly>
                 </div>
             </div>
         </section>

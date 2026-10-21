@@ -2,6 +2,7 @@ const proceso = document.getElementById("proceso");
 const tipo = document.getElementById("tipo");
 const cantidad = document.getElementById("cantidad");
 const nivelAcademico = document.getElementById("nivelAcademico");
+const nivelAcademico2 = document.getElementById("nivelAcademico2");
 const sedes = document.querySelector(".sedes");
 const costoCursos = document.getElementById("costo-cursos");
 const costoRevision = document.getElementById("costo-revision");
@@ -9,6 +10,7 @@ const otraConsulta = document.getElementById("otraConsulta");
 const codigoProceso = document.getElementById("codigo-proceso");
 const costoBase = document.getElementById("costo-base");
 const costoEtapa1 = document.getElementById("costo-etapa1");
+const costoEtapa2 = document.getElementById("costo-etapa2");
 const costosBasePorTipo = {
     "nuevo-programa": "$300.00",
     "nueva-sede": "$100.00",
@@ -38,10 +40,16 @@ function actualizarOpcionesCantidad() {
 }
 
 function actualizarCostoEtapa1() {
-    if (proceso.value !== "menor") return;
+    if (proceso.value !== "menor" && proceso.value !== "mayor") return;
 
-    const costoBaseActual = Number(costosBasePorTipo[tipo.value]?.replace("$", ""));
-    const numeroCursos = Number(cantidad.value) || 0;
+    const costoBaseTipo = costosBasePorTipo[tipo.value];
+    if (!costoBaseTipo) {
+        costoEtapa1.value = costoEtapa1.defaultValue;
+        return;
+    }
+
+    const costoBaseActual = Number(costoBaseTipo.replace("$", ""));
+    const numeroCursos = proceso.value === "menor" ? Number(cantidad.value) || 0 : 0;
     const total = costoBaseActual + numeroCursos * 100;
 
     costoEtapa1.value = `$ ${total.toLocaleString("en-US", {
@@ -49,6 +57,19 @@ function actualizarCostoEtapa1() {
         maximumFractionDigits: 2
     })}`;
 }
+
+function actualizarCostoEtapa2() {
+    const total = [costoCursos, costoRevision].reduce((suma, costo) => {
+        return suma + Number(costo.value.replace(/[^\d.-]/g, ""));
+    }, 0);
+
+    costoEtapa2.value = `$ ${total.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
+}
+
+actualizarCostoEtapa2();
 
 nivelAcademico.addEventListener("change", () => {
     actualizarOpcionesCantidad();
@@ -64,12 +85,15 @@ proceso.addEventListener("change", () => {
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
     nivelAcademico.disabled = !esMenor;
+    nivelAcademico2.disabled = !esMenor;
     cantidad.disabled = !esMenor;
     nivelAcademico.value = "";
+    nivelAcademico2.value = "";
     actualizarOpcionesCantidad();
     sedes.disabled = !habilitarSedes;
     costoCursos.value = esMenor ? "$0.00" : costoCursos.defaultValue;
     costoRevision.value = esMenor ? "$0.00" : costoRevision.defaultValue;
+    actualizarCostoEtapa2();
 
     if (proceso.value === "mayor") {
         tipo.add(new Option("Nuevo programa", "nuevo-programa"));
@@ -98,11 +122,14 @@ otraConsulta.addEventListener("click", () => {
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     nivelAcademico.value = "";
     nivelAcademico.disabled = true;
+    nivelAcademico2.value = "";
+    nivelAcademico2.disabled = true;
     cantidad.disabled = true;
     actualizarOpcionesCantidad();
     sedes.disabled = true;
     costoCursos.value = costoCursos.defaultValue;
     costoRevision.value = costoRevision.defaultValue;
+    actualizarCostoEtapa2();
 
     sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
         checkbox.checked = false;
