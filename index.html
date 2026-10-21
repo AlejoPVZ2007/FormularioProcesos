@@ -14,7 +14,7 @@
         </header>
 
         <section class="etapa" aria-labelledby="etapa1">
-            <h2 id="etapa1"><span class="numero-etapa">1</span> Etapa 1</h2>
+            <h2 id="etapa1"><span class="numero-etapa">1</span> Etapa 1: Aplicación</h2>
 
             <div class="campo">
                 <label for="proceso">Porcentaje de cambio del Plan Curricular</label>
@@ -25,6 +25,8 @@
                 </select>
             </div>
 
+            <p class="nota-titulo"><strong>Nota:</strong> <span id="codigo-proceso" aria-live="polite"></span></p>
+
             <div class="campo">
                 <label for="tipo">Tipo de proceso a presentar</label>
                 <select id="tipo" name="tipo">
@@ -32,13 +34,27 @@
                 </select>
             </div>
 
+            <p class="costo-base"><strong>Costo base:</strong> <span id="costo-base" aria-live="polite"></span></p>
+
             <div class="campo">
-                <label for="cantidad">N° de cursos nuevos en el Plan Curricular</label>
-                <input type="text" id="cantidad" name="cantidad" inputmode="numeric" pattern="[0-9]*"
-                    placeholder="Ingrese la cantidad de cursos nuevos">
+                <label for="nivelAcademico">Nivel académico del programa a presentar</label>
+                <select id="nivelAcademico" name="nivelAcademico" disabled>
+                    <option value="">-- Seleccionar nivel académico --</option>
+                    <option value="pregrado">Pregrado</option>
+                    <option value="maestria">Maestría</option>
+                    <option value="doctorado">Doctorado</option>
+                    <option value="segunda">Segunda Especialidad</option>
+                </select>
             </div>
 
-            <fieldset class="campo sedes">
+            <div class="campo">
+                <label for="cantidad">N° de cursos nuevos en el Plan Curricular</label>
+                <select id="cantidad" name="cantidad" disabled>
+                    <option value="">-- Selecciona primero el nivel académico --</option>
+                </select>
+            </div>
+
+            <fieldset class="campo sedes" disabled>
                 <legend>Sedes en las que se dictará el programa</legend>
                 <label class="sede-opcion" for="sede-molina">
                     <input type="checkbox" id="sede-molina" name="molina" value="molina">
@@ -57,17 +73,6 @@
 
         <section class="etapa" aria-labelledby="etapa2">
             <h2 id="etapa2"><span class="numero-etapa">2</span> Etapa 2</h2>
-
-            <div class="campo">
-                <label for="nivelAcademico">Nivel académico del programa a presentar</label>
-                <select id="nivelAcademico" name="nivelAcademico">
-                    <option value="">-- Seleccionar nivel académico --</option>
-                    <option value="pregrado">Pregrado</option>
-                    <option value="maestria">Maestría</option>
-                    <option value="doctorado">Doctorado</option>
-                    <option value="segunda">Segunda Especialidad</option>
-                </select>
-            </div>
 
             <div class="costos">
                 <div class="campo">

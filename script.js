@@ -6,41 +6,73 @@ const sedes = document.querySelector(".sedes");
 const costoCursos = document.getElementById("costo-cursos");
 const costoRevision = document.getElementById("costo-revision");
 const otraConsulta = document.getElementById("otraConsulta");
+const codigoProceso = document.getElementById("codigo-proceso");
+const costoBase = document.getElementById("costo-base");
+const costosBasePorTipo = {
+    "nuevo-programa": "$300.00",
+    "nueva-sede": "$100.00",
+    "nuevo-programa-y-nueva-sede": "$400.00",
+    "rediseno-no-sustantivo": "$200.00"
+};
 
-cantidad.addEventListener("input", () => {
-    cantidad.value = cantidad.value.replace(/\D/g, "");
-});
+function actualizarOpcionesCantidad() {
+    cantidad.replaceChildren(new Option("-- Seleccionar número de cursos --", ""));
+    const maximo = nivelAcademico.value === "pregrado" ? 10 : nivelAcademico.value ? 5 : 0;
+
+    if (maximo === 0) {
+        cantidad.options[0].textContent = "-- Selecciona primero el nivel académico --";
+        return;
+    }
+
+    for (let numero = 1; numero <= maximo; numero += 1) {
+        cantidad.add(new Option(String(numero), String(numero)));
+    }
+}
+
+nivelAcademico.addEventListener("change", actualizarOpcionesCantidad);
 
 proceso.addEventListener("change", () => {
     tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
-    cantidad.readOnly = proceso.value === "mayor";
-    const bloquearSedesYNivel = proceso.value === "menor";
-    sedes.disabled = bloquearSedesYNivel;
-    nivelAcademico.disabled = bloquearSedesYNivel;
-    costoCursos.value = bloquearSedesYNivel ? "$0.00" : costoCursos.defaultValue;
-    costoRevision.value = bloquearSedesYNivel ? "$0.00" : costoRevision.defaultValue;
+    costoBase.textContent = "";
+    codigoProceso.textContent = proceso.value === "mayor" ? "A" : proceso.value === "menor" ? "B" : "";
+    const esMenor = proceso.value === "menor";
+    const habilitarSedes = proceso.value === "mayor";
+    nivelAcademico.disabled = !esMenor;
+    cantidad.disabled = !esMenor;
+    nivelAcademico.value = "";
+    actualizarOpcionesCantidad();
+    sedes.disabled = !habilitarSedes;
+    costoCursos.value = esMenor ? "$0.00" : costoCursos.defaultValue;
+    costoRevision.value = esMenor ? "$0.00" : costoRevision.defaultValue;
 
     if (proceso.value === "mayor") {
-        cantidad.value = "";
-        tipo.add(new Option("Nuevo programa"));
-        tipo.add(new Option("Nueva sede"));
-    } else if (proceso.value === "menor") {
+        tipo.add(new Option("Nuevo programa", "nuevo-programa"));
+        tipo.add(new Option("Nueva sede", "nueva-sede"));
+        tipo.add(new Option("Nuevo programa y nueva sede", "nuevo-programa-y-nueva-sede"));
+    } else if (esMenor) {
         sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
             checkbox.checked = false;
         });
-        nivelAcademico.value = "";
-        tipo.add(new Option("Rediseño no sustantivo"));
+        tipo.add(new Option("Rediseño no sustantivo", "rediseno-no-sustantivo"));
+        tipo.value = "rediseno-no-sustantivo";
+        tipo.dispatchEvent(new Event("change"));
     }
+});
+
+tipo.addEventListener("change", () => {
+    costoBase.textContent = costosBasePorTipo[tipo.value] || "";
 });
 
 otraConsulta.addEventListener("click", () => {
     proceso.value = "";
+    codigoProceso.textContent = "";
+    costoBase.textContent = "";
     tipo.replaceChildren(new Option("-- Selecciona Tipo de Proceso --", ""));
     nivelAcademico.value = "";
-    nivelAcademico.disabled = false;
-    cantidad.value = "";
-    cantidad.readOnly = false;
-    sedes.disabled = false;
+    nivelAcademico.disabled = true;
+    cantidad.disabled = true;
+    actualizarOpcionesCantidad();
+    sedes.disabled = true;
     costoCursos.value = costoCursos.defaultValue;
     costoRevision.value = costoRevision.defaultValue;
 
