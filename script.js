@@ -12,9 +12,9 @@ const costoBase = document.getElementById("costo-base");
 const costoEtapa1 = document.getElementById("costo-etapa1");
 const costoEtapa2 = document.getElementById("costo-etapa2");
 const costosBasePorTipo = {
-    "nuevo-programa": "$300.00",
-    "nueva-sede": "$100.00",
-    "nuevo-programa-y-nueva-sede": "$400.00",
+    "nuevo-programa": "$400.00",
+    "nueva-sede": "$750.00",
+    "nuevo-programa-y-nueva-sede": "$1900.00",
     "rediseno-no-sustantivo": "$350.00"
 };
 
@@ -49,8 +49,10 @@ function actualizarCostoEtapa1() {
     }
 
     const costoBaseActual = Number(costoBaseTipo.replace("$", ""));
-    const numeroCursos = proceso.value === "menor" ? Number(cantidad.value) || 0 : 0;
-    const total = costoBaseActual + numeroCursos * 100;
+    const cantidadAdicional = proceso.value === "menor"
+        ? (Number(cantidad.value) || 0) * 100
+        : sedes.querySelectorAll('input[type="checkbox"]:checked').length * 750;
+    const total = costoBaseActual + cantidadAdicional;
 
     costoEtapa1.value = `$ ${total.toLocaleString("en-US", {
         minimumFractionDigits: 2,
@@ -113,6 +115,8 @@ tipo.addEventListener("change", () => {
     costoBase.textContent = costosBasePorTipo[tipo.value] || "";
     actualizarCostoEtapa1();
 });
+
+sedes.addEventListener("change", actualizarCostoEtapa1);
 
 otraConsulta.addEventListener("click", () => {
     proceso.value = "";
