@@ -14,7 +14,6 @@ const costoEtapa2 = document.getElementById("costo-etapa2");
 const costosBasePorTipo = {
     "nuevo-programa": "$400.00",
     "nueva-sede": "$750.00",
-    "nuevo-programa-y-nueva-sede": "$1900.00",
     "rediseno-no-sustantivo": "$350.00"
 };
 
@@ -100,7 +99,6 @@ proceso.addEventListener("change", () => {
     if (proceso.value === "mayor") {
         tipo.add(new Option("Nuevo programa", "nuevo-programa"));
         tipo.add(new Option("Nueva sede", "nueva-sede"));
-        tipo.add(new Option("Nuevo programa y nueva sede", "nuevo-programa-y-nueva-sede"));
     } else if (esMenor) {
         sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
             checkbox.checked = false;
@@ -113,6 +111,13 @@ proceso.addEventListener("change", () => {
 
 tipo.addEventListener("change", () => {
     costoBase.textContent = costosBasePorTipo[tipo.value] || "";
+    const esNuevaSede = tipo.value === "nueva-sede";
+    if (esNuevaSede) {
+        sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
+            checkbox.checked = false;
+        });
+    }
+    sedes.disabled = proceso.value !== "mayor" || esNuevaSede;
     actualizarCostoEtapa1();
 });
 
