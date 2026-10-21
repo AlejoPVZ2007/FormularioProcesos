@@ -32,7 +32,7 @@ function actualizarOpcionesCantidad() {
         return;
     }
 
-    for (let numero = 1; numero <= maximo; numero += 1) {
+    for (let numero = 0; numero <= maximo; numero += 1) {
         cantidad.add(new Option(String(numero), String(numero)));
     }
 }
