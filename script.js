@@ -12,6 +12,9 @@ const codigoProceso = document.getElementById("codigo-proceso");
 const costoBase = document.getElementById("costo-base");
 const costoEtapa1 = document.getElementById("costo-etapa1");
 const costoEtapa2 = document.getElementById("costo-etapa2");
+const tipoCambio = document.getElementById("tipo-cambio");
+const totalDolares = document.getElementById("total-dolares");
+const totalSoles = document.getElementById("total-soles");
 const costosBasePorTipo = {
     "nuevo-programa": "$400.00",
     "nueva-sede": "$750.00",
@@ -23,6 +26,26 @@ function crearPlaceholder(texto) {
     placeholder.disabled = true;
     placeholder.hidden = true;
     return placeholder;
+}
+
+function obtenerMonto(valor) {
+    const monto = Number(valor.replace(/[^\d.-]/g, ""));
+    return Number.isFinite(monto) ? monto : 0;
+}
+
+function actualizarCostosTotales() {
+    const total = [costoEtapa1, costoEtapa2, costoVisita]
+        .reduce((suma, costo) => suma + obtenerMonto(costo.value), 0);
+    const tipoCambioActual = obtenerMonto(tipoCambio.value);
+
+    totalDolares.value = `$ ${total.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
+    totalSoles.value = `S/ ${(total * tipoCambioActual).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
 }
 
 function actualizarOpcionesCantidad() {
@@ -45,6 +68,7 @@ function actualizarCostoEtapa1() {
     const costoBaseTipo = costosBasePorTipo[tipo.value];
     if (!costoBaseTipo) {
         costoEtapa1.value = costoEtapa1.defaultValue;
+        actualizarCostosTotales();
         return;
     }
 
@@ -58,6 +82,7 @@ function actualizarCostoEtapa1() {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     })}`;
+    actualizarCostosTotales();
 }
 
 function actualizarCostoEtapa2() {
@@ -69,6 +94,7 @@ function actualizarCostoEtapa2() {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
     })}`;
+    actualizarCostosTotales();
 }
 
 function actualizarCostoCursosPorNivel() {
@@ -80,6 +106,7 @@ function actualizarCostoCursosPorNivel() {
 }
 
 actualizarCostoEtapa2();
+actualizarCostosTotales();
 
 nivelAcademico.addEventListener("change", () => {
     actualizarOpcionesCantidad();
@@ -96,6 +123,7 @@ proceso.addEventListener("change", () => {
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
     costoVisita.value = proceso.value === "mayor" ? "$12,500.00" : "$0.00";
+    actualizarCostosTotales();
     nivelAcademico.disabled = !esMenor;
     nivelAcademico2.disabled = proceso.value !== "mayor";
     cantidad.disabled = !esMenor;
@@ -118,6 +146,7 @@ proceso.addEventListener("change", () => {
         tipo.value = "rediseno-no-sustantivo";
         tipo.dispatchEvent(new Event("change"));
     }
+    actualizarCostosTotales();
 });
 
 tipo.addEventListener("change", () => {
@@ -155,6 +184,7 @@ otraConsulta.addEventListener("click", () => {
     sedes.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
         checkbox.checked = false;
     });
+    actualizarCostosTotales();
 });
 
 (async function contadorVisitas() {
