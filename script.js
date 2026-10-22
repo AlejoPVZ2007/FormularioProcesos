@@ -119,7 +119,7 @@ proceso.addEventListener("change", () => {
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     costoBase.textContent = "";
     costoEtapa1.value = costoEtapa1.defaultValue;
-    codigoProceso.textContent = proceso.value === "mayor" ? "A" : proceso.value === "menor" ? "B" : "";
+    codigoProceso.textContent = proceso.value === "mayor" ? "El proceso toma aproximadamente 11 meses." : proceso.value === "menor" ? "El proceso toma aproximadamente 2 meses." : "";
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
     costoVisita.value = proceso.value === "mayor" ? "$12,500.00" : "$0.00";
