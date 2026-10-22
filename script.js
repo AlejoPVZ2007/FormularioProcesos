@@ -6,6 +6,7 @@ const nivelAcademico2 = document.getElementById("nivelAcademico2");
 const sedes = document.querySelector(".sedes");
 const costoCursos = document.getElementById("costo-cursos");
 const costoRevision = document.getElementById("costo-revision");
+const costoVisita = document.getElementById("costo-visita");
 const otraConsulta = document.getElementById("otraConsulta");
 const codigoProceso = document.getElementById("codigo-proceso");
 const costoBase = document.getElementById("costo-base");
@@ -70,6 +71,14 @@ function actualizarCostoEtapa2() {
     })}`;
 }
 
+function actualizarCostoCursosPorNivel() {
+    if (proceso.value !== "mayor") return;
+
+    costoCursos.value = nivelAcademico2.value === "pregrado" ? "$1,000.00" : "$500.00";
+    costoRevision.value = nivelAcademico2.value === "doctorado" ? "$1,200.00" : "$1,000.00";
+    actualizarCostoEtapa2();
+}
+
 actualizarCostoEtapa2();
 
 nivelAcademico.addEventListener("change", () => {
@@ -77,6 +86,7 @@ nivelAcademico.addEventListener("change", () => {
     actualizarCostoEtapa1();
 });
 cantidad.addEventListener("change", actualizarCostoEtapa1);
+nivelAcademico2.addEventListener("change", actualizarCostoCursosPorNivel);
 
 proceso.addEventListener("change", () => {
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
@@ -85,8 +95,9 @@ proceso.addEventListener("change", () => {
     codigoProceso.textContent = proceso.value === "mayor" ? "A" : proceso.value === "menor" ? "B" : "";
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
+    costoVisita.value = proceso.value === "mayor" ? "$12,500.00" : "$0.00";
     nivelAcademico.disabled = !esMenor;
-    nivelAcademico2.disabled = !esMenor;
+    nivelAcademico2.disabled = proceso.value !== "mayor";
     cantidad.disabled = !esMenor;
     nivelAcademico.value = "";
     nivelAcademico2.value = "";
@@ -128,6 +139,7 @@ otraConsulta.addEventListener("click", () => {
     codigoProceso.textContent = "";
     costoBase.textContent = "";
     costoEtapa1.value = costoEtapa1.defaultValue;
+    costoVisita.value = "$0.00";
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     nivelAcademico.value = "";
     nivelAcademico.disabled = true;
