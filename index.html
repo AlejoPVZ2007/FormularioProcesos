@@ -40,7 +40,7 @@
                 </select>
             </div>
 
-            <p class="costo-base"><strong>Costo base:</strong> <span id="costo-base" aria-live="polite"></span></p>
+            <p class="costo-base"><strong>Costo base:</strong> <span id="costo-base-proceso" aria-live="polite"></span></p>
 
             <div class="campo">
                 <label for="nivelAcademico">Nivel académico del programa a presentar</label>
@@ -102,6 +102,10 @@
             </div>
 
             <div class="costos">
+                <div class="campo">
+                    <label for="costo-base">Costo Base</label>
+                    <input type="text" id="costo-base" value="$ 0.00" readonly>
+                </div>
                 <div class="campo">
                     <label for="costo-cursos">Costo aproximado del 25% de cursos seleccionados por DEAC</label>
                     <input type="text" id="costo-cursos" value="$ 0.00" readonly>

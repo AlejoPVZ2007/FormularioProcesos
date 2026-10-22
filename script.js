@@ -4,12 +4,13 @@ const cantidad = document.getElementById("cantidad");
 const nivelAcademico = document.getElementById("nivelAcademico");
 const nivelAcademico2 = document.getElementById("nivelAcademico2");
 const sedes = document.querySelector(".sedes");
+const costoBase2 = document.getElementById("costo-base");
 const costoCursos = document.getElementById("costo-cursos");
 const costoRevision = document.getElementById("costo-revision");
 const costoVisita = document.getElementById("costo-visita");
 const otraConsulta = document.getElementById("otraConsulta");
 const codigoProceso = document.getElementById("codigo-proceso");
-const costoBase = document.getElementById("costo-base");
+const costoBase = document.getElementById("costo-base-proceso");
 const costoEtapa1 = document.getElementById("costo-etapa1");
 const costoEtapa2 = document.getElementById("costo-etapa2");
 const tipoCambio = document.getElementById("tipo-cambio");
@@ -86,7 +87,7 @@ function actualizarCostoEtapa1() {
 }
 
 function actualizarCostoEtapa2() {
-    const total = [costoCursos, costoRevision].reduce((suma, costo) => {
+    const total = [costoBase2, costoCursos, costoRevision].reduce((suma, costo) => {
         return suma + Number(costo.value.replace(/[^\d.-]/g, ""));
     }, 0);
 
@@ -100,6 +101,11 @@ function actualizarCostoEtapa2() {
 function actualizarCostoCursosPorNivel() {
     if (proceso.value !== "mayor") return;
 
+    const costoBasePorNivel = nivelAcademico2.value === "doctorado" ? 1600 : 1000;
+    costoBase2.value = `$${costoBasePorNivel.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    })}`;
     costoCursos.value = nivelAcademico2.value === "pregrado" ? "$1,000.00" : "$500.00";
     costoRevision.value = nivelAcademico2.value === "doctorado" ? "$1,200.00" : "$1,000.00";
     actualizarCostoEtapa2();
@@ -119,10 +125,15 @@ proceso.addEventListener("change", () => {
     tipo.replaceChildren(crearPlaceholder("-- Selecciona Tipo de Proceso --"));
     costoBase.textContent = "";
     costoEtapa1.value = costoEtapa1.defaultValue;
-    codigoProceso.textContent = proceso.value === "mayor" ? "El proceso toma aproximadamente 11 meses." : proceso.value === "menor" ? "El proceso toma aproximadamente 2 meses." : "";
+    codigoProceso.textContent = proceso.value === "mayor"
+        ? "El proceso toma aproximadamente 11 meses."
+        : proceso.value === "menor"
+            ? "El proceso toma aproximadamente 2 meses."
+            : "";
     const esMenor = proceso.value === "menor";
     const habilitarSedes = proceso.value === "mayor";
     costoVisita.value = proceso.value === "mayor" ? "$12,500.00" : "$0.00";
+    costoBase2.value = costoBase2.defaultValue;
     actualizarCostosTotales();
     nivelAcademico.disabled = !esMenor;
     nivelAcademico2.disabled = proceso.value !== "mayor";
@@ -174,6 +185,7 @@ otraConsulta.addEventListener("click", () => {
     nivelAcademico.disabled = true;
     nivelAcademico2.value = "";
     nivelAcademico2.disabled = true;
+    costoBase2.value = costoBase2.defaultValue;
     cantidad.disabled = true;
     actualizarOpcionesCantidad();
     sedes.disabled = true;
