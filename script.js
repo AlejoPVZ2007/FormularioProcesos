@@ -16,6 +16,10 @@ const costoEtapa2 = document.getElementById("costo-etapa2");
 const tipoCambio = document.getElementById("tipo-cambio");
 const totalDolares = document.getElementById("total-dolares");
 const totalSoles = document.getElementById("total-soles");
+const resumenAplicacion = document.getElementById("resumen-aplicacion");
+const resumenRevision = document.getElementById("resumen-revision");
+const resumenVisita = document.getElementById("resumen-visita");
+const resumenVisitaSubtotal = document.getElementById("resumen-visita-subtotal");
 const costosBasePorTipo = {
     "nuevo-programa": "$400.00",
     "nueva-sede": "$750.00",
@@ -39,6 +43,10 @@ function actualizarCostosTotales() {
         .reduce((suma, costo) => suma + obtenerMonto(costo.value), 0);
     const tipoCambioActual = obtenerMonto(tipoCambio.value);
 
+    resumenAplicacion.textContent = costoEtapa1.value;
+    resumenRevision.textContent = costoEtapa2.value;
+    resumenVisita.textContent = costoVisita.value;
+    resumenVisitaSubtotal.textContent = costoVisita.value;
     totalDolares.value = `$ ${total.toLocaleString("en-US", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
