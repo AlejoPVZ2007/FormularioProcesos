@@ -65,8 +65,8 @@ body {
 }
 
 .logo-usil {
-    width: 58px;
-    height: 58px;
+    width: 100px;
+    height: 100px;
     border: 1px solid rgb(255 255 255 / 75%);
     border-radius: 7px;
     object-fit: cover;

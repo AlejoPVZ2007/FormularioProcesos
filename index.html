@@ -20,7 +20,7 @@
                 <h1>Calculadora de Costos<br>de Procesos DEAC</h1>
                 <p>Estima el costo de los procesos de acreditación según las características de tu solicitud.</p>
             </div>
-            <p class="header-note">Excelencia académica<br><strong>que transforma</strong></p>
+            <p class="header-note"><strong>USIL,</strong><br><strong>Tu puente al mundo</strong></p>
         </div>
     </header>
 
@@ -28,15 +28,15 @@
         <nav class="progress-nav" aria-label="Etapas del proceso">
             <a class="progress-step is-active" href="#etapa-1">
                 <span class="progress-number">1</span>
-                <span><strong>Aplicación</strong><small>Datos generales del proceso</small></span>
+                <span><strong>Etapa 1: Aplicación</strong><small>Datos generales del proceso</small></span>
             </a>
             <a class="progress-step" href="#etapa-2">
                 <span class="progress-number">2</span>
-                <span><strong>Revisión curricular</strong><small>Cursos, mallas y ajustes</small></span>
+                <span><strong>Etapa 2: Revisión curricular</strong><small>Cursos, mallas y ajustes</small></span>
             </a>
             <a class="progress-step" href="#etapa-3">
                 <span class="progress-number">3</span>
-                <span><strong>Visita</strong><small>Costos de evaluación</small></span>
+                <span><strong>Etapa 3: Visita</strong><small>Costos de evaluación</small></span>
             </a>
         </nav>
 
@@ -46,7 +46,7 @@
                     <div class="section-heading">
                         <span class="section-icon" aria-hidden="true">1</span>
                         <div>
-                            <h2 id="etapa1">Aplicación</h2>
+                            <h2 id="etapa1">Etapa 1: Aplicación</h2>
                             <p>Selecciona el tipo de solicitud y sus características.</p>
                         </div>
                         <div class="campo dato-etapa">
@@ -65,7 +65,7 @@
                             </select>
                         </div>
                         <div class="campo">
-                            <label for="tipo">Tipo de solicitud</label>
+                            <label for="tipo">Tipo de Proceso</label>
                             <select id="tipo" name="tipo">
                                 <option value="" disabled selected hidden>Selecciona una opción</option>
                             </select>
@@ -112,7 +112,7 @@
                     <div class="section-heading">
                         <span class="section-icon section-icon--navy" aria-hidden="true">2</span>
                         <div>
-                            <h2 id="etapa2">Revisión curricular</h2>
+                            <h2 id="etapa2">Etapa 2: Revisión curricular</h2>
                             <p>Indica el nivel académico para estimar la revisión.</p>
                         </div>
                     </div>
@@ -150,7 +150,7 @@
                     <div class="section-heading">
                         <span class="section-icon" aria-hidden="true">3</span>
                         <div>
-                            <h2 id="etapa3">Visita</h2>
+                            <h2 id="etapa3">Etapa 3: Visita</h2>
                             <p>El costo de visita depende del tipo de proceso.</p>
                         </div>
                     </div>
@@ -172,17 +172,17 @@
                 </div>
 
                 <div class="resumen-etapa">
-                    <h3>1. Aplicación</h3>
+                    <h3>Etapa 1: Aplicación</h3>
                     <div class="resumen-linea"><span>Solicitud y gestión administrativa</span><strong id="resumen-aplicacion">$ 0.00</strong></div>
                     <div class="resumen-subtotal"><span>Subtotal aplicación</span><input type="text" id="costo-etapa1" value="$ 0.00" readonly aria-label="Subtotal de aplicación"></div>
                 </div>
                 <div class="resumen-etapa">
-                    <h3>2. Revisión curricular</h3>
+                    <h3>Etapa 2: Revisión curricular</h3>
                     <div class="resumen-linea"><span>Costos de revisión</span><strong id="resumen-revision">$ 0.00</strong></div>
                     <div class="resumen-subtotal"><span>Subtotal revisión curricular</span><input type="text" id="costo-etapa2" value="$ 0.00" readonly aria-label="Subtotal de revisión curricular"></div>
                 </div>
                 <div class="resumen-etapa">
-                    <h3>3. Visita</h3>
+                    <h3>Etapa 3: Visita</h3>
                     <div class="resumen-linea"><span>Visita de evaluación</span><strong id="resumen-visita">$ 0.00</strong></div>
                     <div class="resumen-subtotal"><span>Subtotal visita</span><strong id="resumen-visita-subtotal">$ 0.00</strong></div>
                 </div>
@@ -204,6 +204,7 @@
                 <span aria-hidden="true">◉</span> Visitas: <span id="visitas">...</span>
             </div>
             <button type="button" id="otraConsulta" class="button-secondary">Realizar otra consulta</button>
+            <p style="font-size: 0.9em; color: black;">By: Dirección General de Acreditación</p>
         </footer>
     </main>
 
